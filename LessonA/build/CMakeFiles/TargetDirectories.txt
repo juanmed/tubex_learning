@@ -1,0 +1,5 @@
+/home/fer/git_clone/tubex_learning/LessonA/build/CMakeFiles/rebuild_cache.dir
+/home/fer/git_clone/tubex_learning/LessonA/build/CMakeFiles/uninstall.dir
+/home/fer/git_clone/tubex_learning/LessonA/build/CMakeFiles/my_project.dir
+/home/fer/git_clone/tubex_learning/LessonA/build/CMakeFiles/my_project_B.dir
+/home/fer/git_clone/tubex_learning/LessonA/build/CMakeFiles/edit_cache.dir

@@ -10,8 +10,8 @@ int main()
 	Vector x_truth({0.,0.,M_PI/6.}); // (x,y,heading)
 
 	// Creating random map of landmarks
-	int nb_landmarks = 4;
-	IntervalVector map_area(2, Interval(-8,8));
+	int nb_landmarks = 3;
+	IntervalVector map_area(2, Interval(-5,5));
 	vector<IntervalVector> v_b = DataLoader::generate_landmarks_boxes(map_area, nb_landmarks);
 	for (int i = 0 ; i < nb_landmarks ; i++)
 	{
@@ -26,6 +26,7 @@ int main()
   for(auto& obs : v_obs)
   {
     v_d.push_back(obs[0].inflate(0.1)); // adding uncertainties: [-0.1,0.1]
+    cout << "range: " << (obs[0]) << " bearing: " << (obs[1]) << endl; 
   }
 	for (int i = 0 ; i < nb_landmarks ; i++)
 	{
@@ -61,7 +62,7 @@ int main()
     fig.draw_ring(v_b[i][0].mid(), v_b[i][1].mid(), v_d[i], "gray");
 
   fig.draw_vehicle(x_truth, 0.7); // last param: vehicle size
-  fig.draw_box(x); // estimated position
+  //fig.draw_box(x); // estimated position
   fig.show();
 
   vibes::endDrawing();

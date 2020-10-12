@@ -80,6 +80,8 @@ int main()
 
 	cout << " - Exercise A.4: " << endl;
  	IntervalVector y{{0,0},{0,0}};
+ 	y[0].inflate(0.1);
+ 	y[1].inflate(0.1);
  	IntervalVector b{{3,4},{2,3}};
  	IntervalVector cont = cart_prod(y,b);
  	Function f("x[4]", "sqrt( (x[0] - x[2])^2 + (x[1] -x[3])^2 )");
@@ -117,6 +119,8 @@ int main()
  	CtcFunction ctc_dist(Function("x[2]","y[2]","d","sqrt( (x[0] - y[0])^2 + (x[1] -y[1])^2 ) - d"));
  	Interval d(7,8);
  	y = IntervalVector{{0,0},{0,0}};
+ 	y[0].inflate(0.1);
+ 	y[1].inflate(0.2);
  	IntervalVector b1{{1.5, 2.5},{4, 11}};
  	IntervalVector b2{{3, 4},{4, 6.5}};
  	IntervalVector b3{{5, 7},{5.5, 8}};
@@ -124,13 +128,13 @@ int main()
  	vibes::beginDrawing();
  	VIBesFigMap fig3("Before");
  	fig3.set_properties(50,50,400,400);
- 	fig3.draw_circle(0,0,d.ub(), "red[yellow]");
- 	fig3.draw_circle(0,0,d.lb(), "red[white]");
  	fig3.draw_box(b1, "blue[white]");
   fig3.draw_box(b2, "blue[white]");
  	fig3.draw_box(b3, "blue[white]");
+ 	fig3.draw_circle(0,0,d.ub(), "red");
+ 	fig3.draw_circle(0,0,d.lb(), "red");
  	fig3.show();
- 	vibes::endDrawing();
+ 	//vibes::endDrawing();
 
  	ContractorNetwork cn;
  	cn.add(ctc_dist, {y,b1,d});
@@ -139,15 +143,15 @@ int main()
 
  	cn.contract();
 
- 	vibes::beginDrawing();
- 	VIBesFigMap fig4("After");
- 	fig4.set_properties(50,50,400,400);
- 	fig4.draw_circle(0,0,d.ub(), "red[yellow]");
- 	fig4.draw_circle(0,0,d.lb(), "red[white]");
- 	fig4.draw_box(b1, "blue[white]");
-  fig4.draw_box(b2, "blue[white]");
- 	fig4.draw_box(b3, "blue[white]");
- 	fig4.show();
+ 	//vibes::beginDrawing();
+ 	//VIBesFigMap fig4("After");
+ 	//fig3.set_properties(50,50,400,400);
+  fig3.draw_box(b1, "green[white]");
+  fig3.draw_box(b2, "green[white]");
+ 	fig3.draw_box(b3, "green[white]");
+ 	fig3.draw_circle(0,0,d.ub(), "green");
+ 	fig3.draw_circle(0,0,d.lb(), "green");
+ 	fig3.show();
  	vibes::endDrawing();
 
 }

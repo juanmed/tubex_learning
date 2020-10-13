@@ -17,6 +17,14 @@ class MyCtc : public ibex::Ctc
 
     void contract(ibex::IntervalVector& a)
     {
+      IntervalVector b = IntervalVector::empty(2);
+      for(auto& Mi : M)
+      b |= (a & Mi);
+      a = b;
+    }
+
+    void contract2(ibex::IntervalVector& a)
+    {
       // Insert contraction formula here (question D.2)
       vector<IntervalVector> intersections;
       for(const auto mj : M)

@@ -27,7 +27,7 @@ target_compile_options(${PROJECT_NAME} PUBLIC ${TUBEX_CXX_FLAGS})
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${TUBEX_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${TUBEX_LIBRARIES} Ibex::ibex ${TUBEX_LIBRARIES} Ibex::ibex)
 
-add_executable(${PROJECT_NAME}_D LessonD.cpp)
+add_executable(${PROJECT_NAME}_D LessonD_2.cpp)
 target_compile_options(${PROJECT_NAME}_D PUBLIC ${TUBEX_CXX_FLAGS})
 target_include_directories(${PROJECT_NAME}_D SYSTEM PUBLIC ${TUBEX_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}_D PUBLIC ${TUBEX_LIBRARIES} Ibex::ibex ${TUBEX_LIBRARIES} Ibex::ibex)

@@ -62,7 +62,7 @@ int main()
     fig.draw_ring(v_b[i][0].mid(), v_b[i][1].mid(), v_d[i], "gray");
 
   fig.draw_vehicle(x_truth, 0.7); // last param: vehicle size
-  //fig.draw_box(x); // estimated position
+  fig.draw_box(x); // estimated position
   fig.show();
 
   vibes::endDrawing();

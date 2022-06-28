@@ -23,18 +23,20 @@ int main()
 
 	//TrajectoryVector b_distance(tdomain, TFunction(b,"sqrt( (2*cos(t) - b[0])^2 + (sin(2*t) -b[1])^2 ) ,t)", dt));
 	Trajectory dist = sqrt(sqr(actual_x[0]-b[0])+sqr(actual_x[1]-b[1])); // simple operations between traj.
-	RandTrajectory n(tdomain, dt, Interval(-0.5,0.5));
+	RandTrajectory n(tdomain, dt, Interval(-0.1,0.1));
 	Trajectory time(tdomain, TFunction("t"), dt);
 	// TrajectoryVector as a list of scalar trajectories
 	TrajectoryVector actual_y({
-	    dist + n,
+	    dist,
 	    time
 	  });
 
 	TubeVector x(actual_x, dt);
 	x.inflate(0.2);
-	Tube y(dist+n, dt);
-	//y.inflate(0.2);
+	Tube y(dist, dt);
+	//y.inflate(0.01);
+
+
 
 
 	vibes::beginDrawing();
@@ -42,7 +44,7 @@ int main()
   fig_map.set_properties(100, 100, 600, 300);
   fig_map.axis_limits(-2.5,2.5,-0.1,0.1, true);	
   fig_map.add_trajectory(&actual_x, "x*", 0, 1);
-  fig_map.add_trajectory(&actual_y, "y*", 1, 0);
+  //fig_map.add_trajectory(&actual_y, "y*", 1, 0);
 	fig_map.add_tube(&x, "x", 0, 1);
 	//fig_map.add_tube(&y, "y", 1, 0);
   fig_map.add_beacon(b, 0.1); 
@@ -51,9 +53,9 @@ int main()
 
 	ContractorNetwork cn;
 	cn.add(ctc::dist, {x, b,y});	
-	//cn.contract();
+	cn.contract();
 
-	//fig_map.show(0.5); 
+	fig_map.show(0.5); 
 
 	// speed
 	TrajectoryVector actual_v(tdomain, TFunction("(-2*sin(t) ; 2*cos(2*t))"), dt);
@@ -62,7 +64,12 @@ int main()
 
 	cn.add(ctc::deriv, {x, v});
 	cn.contract();
-	fig_map.add_tube(&v, "v", 0, 1);
+	//fig_map.add_tube(&v, "v", 0, 1);
 	fig_map.show(0.5);  
+
+	//VIBesFigTube fig_dist("Distance to the landmark");
+	//fig_dist.set_properties(100, 100, 600, 300);
+	//fig_dist.add_trajectory(&actual_y[0], "y*");
+	//fig_dist.show();
 
 }

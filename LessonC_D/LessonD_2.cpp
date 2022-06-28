@@ -23,6 +23,48 @@ class MyCtc : public ibex::Ctc
 		const std::vector<ibex::IntervalVector> M;
 };
 
+class MyCtc2 : public ibex::Ctc
+{
+  public:
+
+    MyCtc2(const std::vector<ibex::IntervalVector>& M_)
+      : ibex::Ctc(2), // the contractor acts on 2d boxes
+        M(M_)         // attribute needed later on for the contraction
+    {
+
+    }
+
+    void contract(ibex::IntervalVector& a)
+    {
+      // Insert contraction formula here (question D.2)
+      vector<IntervalVector> intersections;
+      for(const auto mj : M)
+      {
+        // compute intersection and add to vector
+        IntervalVector intersection = a & mj; 
+        //a &= mj;
+        intersections.push_back(intersection);
+      }
+      /*
+      It is necessary to initialize union with any element
+      from all intersections... and only afterwards compute
+      union of all intersections
+      */
+      IntervalVector squared_union = intersections[0];
+      for(const auto sj : intersections)
+      {
+        squared_union |= sj;
+      }
+
+      a = squared_union;
+      cout << "usando esta" << endl;
+    }
+
+  protected:
+
+    const std::vector<ibex::IntervalVector> M;
+};	
+
 int main()
 {
 	Vector x_truth({2,1,M_PI/6});
@@ -56,7 +98,7 @@ int main()
 	// Contractors
 	CtcFunction ctc_plus(Function("a", "b", "c", "a+b-c")); // a+b=c
 	CtcFunction ctc_minus(Function("a", "b", "c", "a-b-c")); // a-b=c
-	MyCtc ctc_asso(M);
+	MyCtc2 ctc_asso(M);
 	ContractorNetwork cn;
 	//cout << v_obs << endl;
 

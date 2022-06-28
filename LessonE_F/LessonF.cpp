@@ -37,7 +37,11 @@ int main(){
   fig_map2.set_properties(100, 100, 600, 300);
   fig_map2.axis_limits(-2.5,2.5,-0.1,0.1, true);
   fig_map2.add_tube(&x2, "x2",0,1);
-  fig_map2.show();
+  
+  fig_map2.draw_box(y1, "red[yellow]");
+  fig_map2.draw_box(y2, "red[yellow]");
+
+  fig_map2.show(0.5); // argument is robot size
 
   return 0;
 }
